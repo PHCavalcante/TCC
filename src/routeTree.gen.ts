@@ -14,6 +14,7 @@ import { Route as ClientIndexRouteImport } from './routes/client/index'
 import { Route as ClientRegisterRouteImport } from './routes/client/Register'
 import { Route as ClientLoginRouteImport } from './routes/client/Login'
 import { Route as ClientCartRouteImport } from './routes/client/Cart'
+import { Route as BakeryRegisterRouteImport } from './routes/bakery/Register'
 import { Route as BakeryOrdersRouteImport } from './routes/bakery/Orders'
 import { Route as BakeryLoginRouteImport } from './routes/bakery/Login'
 import { Route as BakeryDashboardRouteImport } from './routes/bakery/Dashboard'
@@ -43,6 +44,11 @@ const ClientCartRoute = ClientCartRouteImport.update({
   path: '/client/Cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BakeryRegisterRoute = BakeryRegisterRouteImport.update({
+  id: '/bakery/Register',
+  path: '/bakery/Register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BakeryOrdersRoute = BakeryOrdersRouteImport.update({
   id: '/bakery/Orders',
   path: '/bakery/Orders',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/bakery/Dashboard': typeof BakeryDashboardRoute
   '/bakery/Login': typeof BakeryLoginRoute
   '/bakery/Orders': typeof BakeryOrdersRoute
+  '/bakery/Register': typeof BakeryRegisterRoute
   '/client/Cart': typeof ClientCartRoute
   '/client/Login': typeof ClientLoginRoute
   '/client/Register': typeof ClientRegisterRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/bakery/Dashboard': typeof BakeryDashboardRoute
   '/bakery/Login': typeof BakeryLoginRoute
   '/bakery/Orders': typeof BakeryOrdersRoute
+  '/bakery/Register': typeof BakeryRegisterRoute
   '/client/Cart': typeof ClientCartRoute
   '/client/Login': typeof ClientLoginRoute
   '/client/Register': typeof ClientRegisterRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/bakery/Dashboard': typeof BakeryDashboardRoute
   '/bakery/Login': typeof BakeryLoginRoute
   '/bakery/Orders': typeof BakeryOrdersRoute
+  '/bakery/Register': typeof BakeryRegisterRoute
   '/client/Cart': typeof ClientCartRoute
   '/client/Login': typeof ClientLoginRoute
   '/client/Register': typeof ClientRegisterRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/bakery/Dashboard'
     | '/bakery/Login'
     | '/bakery/Orders'
+    | '/bakery/Register'
     | '/client/Cart'
     | '/client/Login'
     | '/client/Register'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/bakery/Dashboard'
     | '/bakery/Login'
     | '/bakery/Orders'
+    | '/bakery/Register'
     | '/client/Cart'
     | '/client/Login'
     | '/client/Register'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/bakery/Dashboard'
     | '/bakery/Login'
     | '/bakery/Orders'
+    | '/bakery/Register'
     | '/client/Cart'
     | '/client/Login'
     | '/client/Register'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   BakeryDashboardRoute: typeof BakeryDashboardRoute
   BakeryLoginRoute: typeof BakeryLoginRoute
   BakeryOrdersRoute: typeof BakeryOrdersRoute
+  BakeryRegisterRoute: typeof BakeryRegisterRoute
   ClientCartRoute: typeof ClientCartRoute
   ClientLoginRoute: typeof ClientLoginRoute
   ClientRegisterRoute: typeof ClientRegisterRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientCartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bakery/Register': {
+      id: '/bakery/Register'
+      path: '/bakery/Register'
+      fullPath: '/bakery/Register'
+      preLoaderRoute: typeof BakeryRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bakery/Orders': {
       id: '/bakery/Orders'
       path: '/bakery/Orders'
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   BakeryDashboardRoute: BakeryDashboardRoute,
   BakeryLoginRoute: BakeryLoginRoute,
   BakeryOrdersRoute: BakeryOrdersRoute,
+  BakeryRegisterRoute: BakeryRegisterRoute,
   ClientCartRoute: ClientCartRoute,
   ClientLoginRoute: ClientLoginRoute,
   ClientRegisterRoute: ClientRegisterRoute,
