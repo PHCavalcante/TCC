@@ -1,3 +1,9 @@
+import Menu from "../../components/Menu"
+
 export default function Dashboard() {
-  return <div>Dashboard - Padaria</div>
+  return (
+    <div>
+      <Menu />
+    </div>
+  );
 }
