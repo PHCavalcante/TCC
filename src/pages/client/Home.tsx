@@ -2,19 +2,45 @@ import location from "../../assets/location.svg";
 import { useEffect, useState } from 'react';
 import { useLocalizacao } from "../../utils/GetLocation";
 import { palette } from "../../theme";
+import background from "../../assets/background.png";
 
 export default function Home() {
   const { coordenadas, enderecoCompleto, rua, erro, carregando, pegarLocalizacao, buscarCep } = useLocalizacao();
   const [cep, setCep] = useState("");
+  const [permissionDenied, setPermissionDenied] = useState(false);
 
   useEffect(() => {
+    const checkPermission = async () => {
+      const permissionStatus = await navigator.permissions.query({ name: 'geolocation' });
+      setPermissionDenied(permissionStatus.state === 'denied');
+    };
+    checkPermission();
     pegarLocalizacao();
-  }, [pegarLocalizacao]);
+  }, []);
 
   if (carregando) {
     return (
       <div className="flex flex-col h-full items-center justify-center">
         <p>Obtendo localização...</p>
+      </div>
+    );
+  }
+  console.log("Permission Denied:", permissionDenied);
+  if (permissionDenied) {
+    return (
+      <div className="h-full w-full relative">
+        <img src={background} className="h-full w-full absolute z-0" alt="Background" />
+        <div className="flex flex-col h-full items-center justify-center z-10 relative">
+          <h1 className="font-bold mt-10.75">BEM VINDO</h1>
+          <div className="h-full flex flex-col items-center">
+            <img className="mt-32" src={location} width={56} height={79} alt="Ícone Localização" />
+            <div className="bg-white rounded-2xl p-4 mt-32 shadow-md text-center">
+              <h2 className="font-bold">Por favor, habilite o acesso a localização</h2>
+              <p>O acesso a localização é importante para descobrir padarias próximas a você</p>
+            </div>
+            <button onClick={() => pegarLocalizacao()} className="mt-auto mb-8 rounded-lg py-2 px-4 text-white cursor-pointer" style={{ backgroundColor: palette.light.accent }}>Permitir</button>
+          </div>
+        </div>
       </div>
     );
   }
