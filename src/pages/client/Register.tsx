@@ -1,6 +1,8 @@
 import logo from "../../assets/logo.png";
 import { palette } from "../../theme";
 import Separator from "../../components/Separator";
+import { supabase } from "../../utils/supabase";
+import googleIcon from "../../assets/google_icon.svg";
 
 export default function Login() {
   return (
@@ -48,6 +50,13 @@ export default function Login() {
         Criar Conta
       </button>
       <Separator />
+      <button
+        className="flex mt-10 mb-20 items-center justify-center gap-3.75 w-80 h-12 rounded-lg border border-gray-500"
+        onClick={async () => await supabase.auth.signInWithOAuth({ provider: "google" })}
+      >
+        <img src={googleIcon} alt="Login com o Google" />
+        Entrar com Google
+      </button>
       <div className="mt-4 text-sm">
         <span className="text-gray-600">Já possui conta? </span>
         <a href="/client/login" className="font-semibold">
